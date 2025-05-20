@@ -31,9 +31,9 @@
                 }
             });
         });
-        $('.html-editor').summernote({
+        /**$('.html-editor').summernote({
           height: 300,
           tabsize: 2
-        });
+        });**/
     })
 })(jQuery);
