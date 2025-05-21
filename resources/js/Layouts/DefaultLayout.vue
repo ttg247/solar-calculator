@@ -1,4 +1,6 @@
 <script setup>
+    import { reactive, provide } from 'vue'
+
     import AppHeader from '@/Components/layout/Header.vue'
     import AppSidebar from '@/Components/layout/AppSidebar.vue'
     import RightSidebar from '@/Components/layout/RightSidebarChat.vue'
@@ -6,6 +8,13 @@
     import AppFooter from '@/Components/layout/Footer.vue'
     import EditableLayoutModal from '@/Components/layout/EditableLayoutModal.vue'
     import AppsModal from '@/Components/layout/AppsModal.vue'
+    // This holds chat visibility and selected user info
+    const chatState = reactive({
+        isVisible: false,
+        selectedUser: null,
+    })
+
+    provide('chatState', chatState)
 </script>
 
 <template>
@@ -26,7 +35,9 @@
             <RightSidebar />
 
             <!-- Chat Panel -->
-            <ChatPanel />
+            <!-- Chat Panel -->
+                    <ChatPanel v-if="isChatVisible" :visible="true" @close="isChatVisible = false" />
+
 
             <!-- Footer -->
             <AppFooter />
