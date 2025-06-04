@@ -1,3 +1,88 @@
+<script>
+export default {
+  name: "EnergyCalculator",
+  data() {
+    return {
+      appliances: [
+        { name: "Fan", wattage: 75 },
+        { name: "Bulb", wattage: 10 },
+        { name: "TV", wattage: 100 },
+        { name: "Refrigerator", wattage: 150 },
+      ],
+      selectedAppliance: "Fan",
+      selectedQuantity: 1,
+      newApplianceName: "",
+      newApplianceWattage: null,
+      myAppliances: [],
+
+      // Advanced controls
+      advanced: false,
+      billingPeriod: 30,
+      costPerKwh: 50,
+      defaultUsageHours: 3,
+    };
+  },
+  computed: {
+    canAddToList() {
+      return this.selectedAppliance && this.selectedQuantity > 0;
+    },
+    canAddApplianceType() {
+      return (
+        this.newApplianceName.trim() !== "" &&
+        this.newApplianceWattage > 0 &&
+        !this.appliances.some(
+          (a) => a.name.toLowerCase() === this.newApplianceName.trim().toLowerCase()
+        )
+      );
+    },
+    totalConsumption() {
+      return this.myAppliances.reduce(
+        (sum, item) => sum + this.calculateApplianceKwh(item),
+        0
+      );
+    },
+    totalCost() {
+      return this.totalConsumption * this.costPerKwh;
+    },
+  },
+  methods: {
+    addToMyAppliances() {
+      const appliance = this.appliances.find(
+        (a) => a.name === this.selectedAppliance
+      );
+      if (!appliance) return;
+
+      this.myAppliances.push({
+        name: appliance.name,
+        wattage: appliance.wattage,
+        quantity: this.selectedQuantity,
+        usageHours: this.defaultUsageHours,
+      });
+
+      this.selectedQuantity = 1;
+    },
+    calculateApplianceKwh(item) {
+      const hours = this.advanced ? item.usageHours : this.defaultUsageHours;
+      return (
+        (item.wattage * item.quantity * hours * this.billingPeriod) / 1000
+      );
+    },
+    removeAppliance(index) {
+      this.myAppliances.splice(index, 1);
+    },
+    addApplianceType() {
+      this.appliances.push({
+        name: this.newApplianceName.trim(),
+        wattage: this.newApplianceWattage,
+      });
+      this.selectedAppliance = this.newApplianceName.trim();
+      this.newApplianceName = "";
+      this.newApplianceWattage = null;
+    },
+  },
+};
+</script>
+
 <template>
   <div class="card calculator-card">
     <div class="card-body">
@@ -141,90 +226,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "EnergyCalculator",
-  data() {
-    return {
-      appliances: [
-        { name: "Fan", wattage: 75 },
-        { name: "Bulb", wattage: 10 },
-        { name: "TV", wattage: 100 },
-        { name: "Refrigerator", wattage: 150 },
-      ],
-      selectedAppliance: "Fan",
-      selectedQuantity: 1,
-      newApplianceName: "",
-      newApplianceWattage: null,
-      myAppliances: [],
-
-      // Advanced controls
-      advanced: false,
-      billingPeriod: 30,
-      costPerKwh: 50,
-      defaultUsageHours: 3,
-    };
-  },
-  computed: {
-    canAddToList() {
-      return this.selectedAppliance && this.selectedQuantity > 0;
-    },
-    canAddApplianceType() {
-      return (
-        this.newApplianceName.trim() !== "" &&
-        this.newApplianceWattage > 0 &&
-        !this.appliances.some(
-          (a) => a.name.toLowerCase() === this.newApplianceName.trim().toLowerCase()
-        )
-      );
-    },
-    totalConsumption() {
-      return this.myAppliances.reduce(
-        (sum, item) => sum + this.calculateApplianceKwh(item),
-        0
-      );
-    },
-    totalCost() {
-      return this.totalConsumption * this.costPerKwh;
-    },
-  },
-  methods: {
-    addToMyAppliances() {
-      const appliance = this.appliances.find(
-        (a) => a.name === this.selectedAppliance
-      );
-      if (!appliance) return;
-
-      this.myAppliances.push({
-        name: appliance.name,
-        wattage: appliance.wattage,
-        quantity: this.selectedQuantity,
-        usageHours: this.defaultUsageHours,
-      });
-
-      this.selectedQuantity = 1;
-    },
-    calculateApplianceKwh(item) {
-      const hours = this.advanced ? item.usageHours : this.defaultUsageHours;
-      return (
-        (item.wattage * item.quantity * hours * this.billingPeriod) / 1000
-      );
-    },
-    removeAppliance(index) {
-      this.myAppliances.splice(index, 1);
-    },
-    addApplianceType() {
-      this.appliances.push({
-        name: this.newApplianceName.trim(),
-        wattage: this.newApplianceWattage,
-      });
-      this.selectedAppliance = this.newApplianceName.trim();
-      this.newApplianceName = "";
-      this.newApplianceWattage = null;
-    },
-  },
-};
-</script>
 
 <style scoped>
 .calculator-card {
