@@ -1,52 +1,76 @@
-# 🏋️‍♀️ Fitness Planner
+# ☀️ Solar Calculator App
 
-**Fitness Planner** is a personal health and workout tracking tool designed to help users set fitness goals, plan workout routines, track progress, and maintain consistency in their fitness journey. Whether you're a beginner or an advanced athlete, this planner adapts to your goals.
+The **Solar Calculator App** helps users estimate the total energy consumption of their household by allowing them to list all their electrical appliances. Based on standardized energy ratings, the app calculates the daily and monthly energy requirements, providing insights to guide solar system planning.
+
+---
 
 ## 🚀 Features
 
-* 📅 **Workout Scheduler**: Plan your weekly workouts with custom routines.
-* 📝 **Exercise Library**: Browse or add exercises with instructions and media.
-* 🎯 **Goal Tracking**: Set goals (weight loss, muscle gain, endurance) and monitor progress.
-* 📊 **Analytics Dashboard**: View stats like calories burned, weight progress, and consistency.
-* 🛠️ **Custom Workouts**: Create and save your own routines or templates.
-* 📅 **Calendar View**: Visualize your workout plan and rest days.
+- ✅ Add household appliances with quantity and usage hours
+- 📊 Calculate daily and monthly energy consumption (in Wh/kWh)
+- 📦 Uses standardized power ratings for common appliances
+- 📱 Simple, user-friendly interface
+- ☁️ Ideal for planning solar panel installations and inverter capacity
 
+---
 
-## 🔧 Tech Stack
+## 🛠 How It Works
 
-* **Frontend**: Vue.js 
-* **Backend**: Laravel 
-* **Database**: MySQL 
+1. **User Input**: The user selects appliances from a predefined list or adds custom ones.
+2. **Usage Data**: For each appliance, the user provides:
+   - Quantity
+   - Average daily usage (in hours)
+3. **Calculation**: The app multiplies:
+4. **Total Energy Requirement** is shown:
+- Daily Total (Wh or kWh)
+- Monthly Total (estimated)
 
-## 📦 Installation
+---
 
-```bash
-git clone https://github.com/ttg247/fitness-planner.git
-cd fitness-planner
-npm install
-npm run dev
-```
+## 📚 Example
 
-> Modify above commands based on your stack (e.g., `composer install`, `flutter run`, etc.)
+| Appliance     | Quantity | Hours/Day | Power Rating | Daily Usage (Wh) |
+|---------------|----------|-----------|---------------|------------------|
+| TV            | 1        | 5         | 100 W         | 500 Wh           |
+| Fan           | 2        | 10        | 75 W          | 1,500 Wh         |
+| Refrigerator  | 1        | 24        | 150 W         | 3,600 Wh         |
 
-## 🧪 Testing
+**Total Daily Consumption**: `5,600 Wh` (5.6 kWh)
 
-```bash
-# Unit tests
-npm run test
+---
 
-# End-to-end tests
-npm run test:e2e
-```
+## 📦 Technologies Used
+
+- Laravel (or any other backend framework you're using)
+- Vue.js (or your frontend framework)
+- TailwindCSS / Bootstrap for styling
+- LocalStorage or API backend for saving sessions (optional)
+
+---
+
+## ✅ Use Cases
+
+- Individuals planning to install a **solar power system**
+- Solar engineers who need quick, standardized estimates
+- Homeowners comparing energy usage before/after upgrades
+
+---
+
+## 🛠️ Future Improvements
+
+- Solar panel and battery size suggestions based on total load
+- Support for Nigerian appliance standards and voltage
+- Offline mode / PWA support
+- Export to PDF or Excel
+
+---
+
+## 📬 Contact
+
+Created by Theo — For support or feature requests, email **ttggwll@gmail.com**  
+Business Inquiries: **Tedtek Solutions**
+---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
-
-## 🙌 Contribution
-
-1. Fork the repo
-2. Create a new branch (`git checkout -b feature-name`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature-name`)
-5. Open a Pull Request
+This project is open-source and available under the [MIT License](LICENSE).
